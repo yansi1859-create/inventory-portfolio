@@ -1,0 +1,193 @@
+{
+  "date": "2026-10-15",
+  "snapshot_directory": "outputs/inventory-portfolio-public",
+  "git_initialized": false,
+  "original_project_unchanged": true,
+  "original_databases_unchanged": 3,
+  "original_git_metadata_unchanged": true,
+  "core_python_and_tests_unchanged": [
+    "inventory/app.py",
+    "inventory/legacy.py",
+    "inventory/__init__.py",
+    "tests/test_integrations.py",
+    "tests/test_regressions.py",
+    "tests/test_business_flow.py",
+    "LICENSE",
+    "pyproject.toml",
+    "requirements-tested.txt"
+  ],
+  "new_environment_install": {
+    "requirements": "passed",
+    "editable_snapshot": "passed after temporary path shortening",
+    "initial_failure": "WinError 206: build temporary path too long",
+    "resolution": "use shorter per-process temporary directory; no system or business changes",
+    "pip_check": "No broken requirements found",
+    "imports_verified_from_snapshot": true
+  },
+  "pytest": {
+    "passed": 73,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "console_result": "73 passed in 6.72s",
+    "case_counts": {
+      "tests.test_business_flow": 38,
+      "tests.test_integrations": 6,
+      "tests.test_regressions": 29
+    }
+  },
+  "browser": {
+    "browser": "154.0.8037.98",
+    "routes": [
+      {
+        "application": "single-warehouse",
+        "path": "/",
+        "status": 200
+      },
+      {
+        "application": "single-warehouse",
+        "path": "/stock",
+        "status": 200
+      },
+      {
+        "application": "single-warehouse",
+        "path": "/products",
+        "status": 200
+      },
+      {
+        "application": "single-warehouse",
+        "path": "/documents",
+        "status": 200
+      },
+      {
+        "application": "single-warehouse",
+        "path": "/ledger",
+        "status": 200
+      },
+      {
+        "application": "legacy-reference",
+        "path": "/",
+        "status": 200
+      },
+      {
+        "application": "legacy-reference",
+        "path": "/product",
+        "status": 200
+      },
+      {
+        "application": "legacy-reference",
+        "path": "/location",
+        "status": 200
+      },
+      {
+        "application": "legacy-reference",
+        "path": "/movement",
+        "status": 200
+      }
+    ],
+    "loaded_resources": [
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 200
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 200
+      },
+      {
+        "path": "/static/jquery-3.3.1.slim.min.js",
+        "status": 200
+      },
+      {
+        "path": "/static/bootstrap.min.js",
+        "status": 200
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 304
+      },
+      {
+        "path": "/static/jquery-3.3.1.slim.min.js",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.js",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 304
+      },
+      {
+        "path": "/static/jquery-3.3.1.slim.min.js",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.js",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.css",
+        "status": 304
+      },
+      {
+        "path": "/static/jquery-3.3.1.slim.min.js",
+        "status": 304
+      },
+      {
+        "path": "/static/bootstrap.min.js",
+        "status": 304
+      }
+    ],
+    "failed_responses": [],
+    "request_failures": [],
+    "page_errors": [],
+    "success": true
+  },
+  "screenshots": {
+    "count": 8,
+    "unchanged_from_original_captures": true,
+    "files": [
+      "docs/screenshots/01-product-catalog.png",
+      "docs/screenshots/02-opening-receipt-20.png",
+      "docs/screenshots/03-purchase-receipt-10.png",
+      "docs/screenshots/04-sales-issue-15.png",
+      "docs/screenshots/05-stock-balance-15.png",
+      "docs/screenshots/06-oversale-blocked-16.png",
+      "docs/screenshots/07-low-stock-warning.png",
+      "docs/screenshots/08-posted-stock-ledger.png"
+    ]
+  },
+  "final_file_checks": {
+    "file_count": 56,
+    "prohibited_files": [],
+    "personal_home_path_matches": [],
+    "limited_secret_signature_matches": [],
+    "broken_local_markdown_links": [],
+    "gitignore_ignored_samples_passed": 21,
+    "gitignore_visible_samples_passed": 16,
+    "manual_acceptance_blank_rows": 22,
+    "other_images_or_fonts": [],
+    "original_author_attribution_retained": true,
+    "mock_test_form_tokens_retained": true,
+    "original_raw_logs_excluded": true,
+    "full_public_file_scan": true
+  },
+  "record_scope": "Historical validation of the clean local snapshot on 2026-10-15, before Git initialization. The git_initialized value records that validation stage, not the later publication state."
+}

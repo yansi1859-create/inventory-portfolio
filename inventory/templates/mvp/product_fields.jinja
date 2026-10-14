@@ -1,0 +1,5 @@
+<label>商品编码（唯一）<input name="code" maxlength="40" value="{{ product.code if product else '' }}" required></label>
+<label>商品名称<input name="name" maxlength="100" value="{{ product.name if product else '' }}" required></label>
+<label>单位，例如“本”<input name="unit" maxlength="20" value="{{ product.unit if product else '本' }}" required></label>
+<label>安全库存（允许为 0）<input name="safety_stock" type="number" min="0" max="2147483647" step="1" value="{{ product.safety_stock if product else 0 }}" required></label>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

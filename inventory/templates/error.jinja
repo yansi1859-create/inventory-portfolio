@@ -1,0 +1,8 @@
+{% extends 'base-template.jinja' %}
+{% block content %}
+<div class="container">
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
+    <p>本次操作未保存。请返回原页面检查输入。</p>
+    <a href="{{ url_for('summary') }}">返回汇总</a>
+</div>
+{% endblock %}

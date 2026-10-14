@@ -1,0 +1,18 @@
+{% extends 'mvp/base.jinja' %}
+{% block content %}
+<section>
+    <h1>默认仓 · 库存流水</h1>
+    <p>每条流水对应一张已过账单据。正数表示入库，负数表示出库。</p>
+    <p class="hint">按确认先后排列。“变更后库存”为该商品在该次确认后的库存；不按业务日期回溯重算历史余额。</p>
+</section>
+<section class="table-wrap">
+    <table class="table">
+        <thead><tr><th>流水号</th><th>来源单据</th><th>类型</th><th>业务日期</th><th>商品</th><th>变更数量</th><th>变更后库存</th><th>确认时间</th></tr></thead>
+        <tbody>{% for e in entries %}
+        <tr><td>{{ e.id }}</td><td><a href="{{ url_for('document', document_id=e.document_id) }}">单据 {{ e.document_id }}</a></td>
+            <td>{{ kinds[e.kind] }}</td><td>{{ e.business_date }}</td><td>{{ e.product_code }} · {{ e.product_name }}</td>
+            <td>{{ '%+d'|format(e.change_quantity) }} {{ e.product_unit }}</td><td>{{ e.balance_after }}</td><td>{{ e.created_at|local_time }}</td></tr>
+        {% else %}<tr><td colspan="8">暂无流水。草稿不会产生流水。</td></tr>{% endfor %}</tbody>
+    </table>
+</section>
+{% endblock %}

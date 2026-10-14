@@ -1,0 +1,234 @@
+{
+  "generated_at_utc": "2026-10-14T16:45:21.770Z",
+  "method": "Playwright browser form interactions and unedited page.screenshot PNG captures",
+  "browser": "154.0.8037.98",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "simulated_product": {
+    "code": "DEMO-RELEASE-001",
+    "name": "模拟商品·作品集演示笔记本",
+    "unit": "件"
+  },
+  "steps": [
+    {
+      "kind": "opening",
+      "quantity": 20,
+      "draft_balance": 0,
+      "confirmed_balance": 20,
+      "document_id": 1
+    },
+    {
+      "kind": "purchase",
+      "quantity": 10,
+      "draft_balance": 20,
+      "confirmed_balance": 30,
+      "document_id": 2
+    },
+    {
+      "kind": "sale",
+      "quantity": 15,
+      "draft_balance": 30,
+      "confirmed_balance": 15,
+      "document_id": 3
+    },
+    {
+      "kind": "oversale",
+      "quantity": 16,
+      "response_status": 400,
+      "remaining_balance": 15,
+      "document_id": 4
+    },
+    {
+      "kind": "safety_stock",
+      "threshold": 16,
+      "balance": 15,
+      "reminder": true
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "docs/screenshots/01-product-catalog.png",
+      "description": "真实新增的明确标注模拟商品，初始安全库存0",
+      "url": "http://127.0.0.1:<isolated-port>/products",
+      "sha256": "6b18301eb8a6252309b8db18b6f627748e6b0333287bd5b87ed5901cb346c2fa",
+      "bytes": 55090
+    },
+    {
+      "file": "docs/screenshots/02-opening-receipt-20.png",
+      "description": "期初入库20件，已确认并生成真实流水",
+      "url": "http://127.0.0.1:<isolated-port>/documents/1",
+      "sha256": "3ef68efe3989f022faa99c34b80e03492834810563202f76dca3e6739ccb5fbf",
+      "bytes": 46642
+    },
+    {
+      "file": "docs/screenshots/03-purchase-receipt-10.png",
+      "description": "采购入库10件，已确认并生成真实流水",
+      "url": "http://127.0.0.1:<isolated-port>/documents/2",
+      "sha256": "4c5323373bd50b2926c19f3908d54d0ee67fc1815a7458cf52e9584556886d52",
+      "bytes": 46873
+    },
+    {
+      "file": "docs/screenshots/04-sales-issue-15.png",
+      "description": "销售出库15件，已确认并生成真实流水",
+      "url": "http://127.0.0.1:<isolated-port>/documents/3",
+      "sha256": "7735a50c995bbc4f8fa19a8d4b87b9addf251597e4505b13e4423f8476240179",
+      "bytes": 46621
+    },
+    {
+      "file": "docs/screenshots/05-stock-balance-15.png",
+      "description": "已过账期初20加采购10减销售15，真实结存15件",
+      "url": "http://127.0.0.1:<isolated-port>/stock",
+      "sha256": "8c010e48d31d96f3b7193eb5ae6493d4cedcbe998905b84d80348e1d40badb2a",
+      "bytes": 42708
+    },
+    {
+      "file": "docs/screenshots/06-oversale-blocked-16.png",
+      "description": "真实服务器拒绝销售16件，库存15，返回400并保留草稿",
+      "url": "http://127.0.0.1:<isolated-port>/documents/4/confirm",
+      "sha256": "3dae9e686a216d77cc65b7702ccff1761ccfe1e288d9ede88dd34a0a05d7fab5",
+      "bytes": 31473
+    },
+    {
+      "file": "docs/screenshots/07-low-stock-warning.png",
+      "description": "通过真实商品编辑表单设置安全库存16，结存15触发低库存",
+      "url": "http://127.0.0.1:<isolated-port>/?low=1",
+      "sha256": "8011be511e9b748d9594cbba302fb7f65a9d84c977fa104d7843e03f3fea8562",
+      "bytes": 43625
+    },
+    {
+      "file": "docs/screenshots/08-posted-stock-ledger.png",
+      "description": "三条真实已过账流水：+20、+10、-15；超售草稿没有流水",
+      "url": "http://127.0.0.1:<isolated-port>/ledger",
+      "sha256": "31b851cbe256318f1ce98db6f78551f0a4abc0806d7e114fca6ccaffa8137cee",
+      "bytes": 58027
+    }
+  ],
+  "page_errors": [],
+  "final_ledger_rows": 3,
+  "final_stock": 15,
+  "success": true,
+  "database_verification": {
+    "catalog": [
+      [
+        "DEMO-RELEASE-001",
+        "模拟商品·作品集演示笔记本",
+        "件",
+        16
+      ]
+    ],
+    "states": [
+      [
+        1,
+        "opening",
+        20,
+        "posted"
+      ],
+      [
+        2,
+        "purchase",
+        10,
+        "posted"
+      ],
+      [
+        3,
+        "sale",
+        15,
+        "posted"
+      ],
+      [
+        4,
+        "sale",
+        16,
+        "draft"
+      ]
+    ],
+    "ledger": [
+      [
+        20
+      ],
+      [
+        10
+      ],
+      [
+        -15
+      ]
+    ],
+    "balance": 15
+  },
+  "browser_probe": {
+    "default_chromium": "unavailable: bundled browser executable missing",
+    "msedge": "failed to launch; closed with named pipe error",
+    "chrome": "success: installed Chrome 154.0.8037.98"
+  },
+  "final_checks": {
+    "existing_files_changed": [
+      "README.md"
+    ],
+    "business_code_and_templates_unchanged": true,
+    "previous_database_files_unchanged": 3,
+    "git_index_head_config_unchanged": true,
+    "image_checks": [
+      {
+        "file": "docs/screenshots/01-product-catalog.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      },
+      {
+        "file": "docs/screenshots/02-opening-receipt-20.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      },
+      {
+        "file": "docs/screenshots/03-purchase-receipt-10.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      },
+      {
+        "file": "docs/screenshots/04-sales-issue-15.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      },
+      {
+        "file": "docs/screenshots/05-stock-balance-15.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      },
+      {
+        "file": "docs/screenshots/06-oversale-blocked-16.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      },
+      {
+        "file": "docs/screenshots/07-low-stock-warning.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      },
+      {
+        "file": "docs/screenshots/08-posted-stock-ledger.png",
+        "width": 1440,
+        "height": 1000,
+        "unchanged_capture_hash": true
+      }
+    ],
+    "ignore_samples_passed": 14,
+    "tracked_sensitive_path_matches": [],
+    "limited_secret_signature_matches": [],
+    "private_home_path_matches_in_publish_candidates": [],
+    "personally_filled_acceptance_modified": false,
+    "full_test_suite_rerun": false,
+    "remote": "https://github.com/gavindsouza/inventory-management-system.git",
+    "branch": "main",
+    "head": "d29d07109bc56b46c55e6d035e1cd5a53aaed123",
+    "readme_and_release_report_broken_links": [],
+    "readme_only_gallery_added": true
+  }
+}

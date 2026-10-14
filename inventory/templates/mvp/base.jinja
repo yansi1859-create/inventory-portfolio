@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>轻量进销存 · 求职学习项目</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <style>
+        body { background: #f5f7f9; color: #243444; }
+        main { max-width: 1120px; margin: 24px auto; padding: 0 16px; }
+        nav { background: #243444; padding: 16px; display: flex; gap: 22px; flex-wrap: wrap; }
+        nav a { color: white; }
+        section { background: white; padding: 20px; margin-bottom: 20px; border: 1px solid #dce2e7; border-radius: 6px; }
+        h1 { font-size: 1.6rem; } h2 { font-size: 1.2rem; }
+        label { display: block; margin-bottom: 14px; }
+        input, select, textarea { display: block; width: 100%; max-width: 520px; padding: 7px; border: 1px solid #9daab7; border-radius: 4px; }
+        input[type=hidden] { display: none; }
+        .table-wrap { overflow-x: auto; }
+        .table td, .table th { vertical-align: middle; white-space: nowrap; }
+        .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .actions form { margin: 0; }
+        .hint, footer { color: #586675; font-size: .9rem; }
+        .warning { color: #9a4b00; font-weight: bold; }
+        footer { margin: 24px 0; }
+    </style>
+</head>
+<body>
+<nav aria-label="主导航">
+    <a href="{{ url_for('inventory') }}">库存查询</a>
+    <a href="{{ url_for('products') }}">商品档案</a>
+    <a href="{{ url_for('documents') }}">业务单据</a>
+    <a href="{{ url_for('ledger') }}">库存流水</a>
+</nav>
+<main>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-info" role="status">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+    <footer>单仓 · 单用户 · 学习演示。基于 <a href="https://github.com/gavindsouza/inventory-management-system">Gavin D'souza 的开源项目</a>二次开发，保留原 MIT 许可证。业务日期单独记录；操作时间显示为北京时间。</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'mvp/base.jinja' %}
+{% block content %}
+<section>
+    <h1>单据 {{ document.id }} · {{ '已过账，只读' if document.state == 'posted' else '草稿，库存尚未改变' }}</h1>
+    <p>创建时间：{{ document.created_at|local_time }}；确认时间：{{ document.posted_at|local_time }}</p>
+    {% if document.state == 'posted' %}
+    <dl>
+        <dt>类型</dt><dd>{{ kinds[document.kind] }}</dd>
+        <dt>商品</dt><dd>{{ document.product_code }} · {{ document.product_name }}</dd>
+        <dt>数量</dt><dd>{{ document.quantity }} {{ document.product_unit }}</dd>
+        <dt>业务日期</dt><dd>{{ document.business_date }}</dd>
+        <dt>备注</dt><dd>{{ document.note or '无' }}</dd>
+    </dl>
+    <p>已生成一条库存流水，不能修改或删除此单据。</p>
+    {% else %}
+    <form method="post" action="{{ url_for('document', document_id=document.id) }}">
+        {% include 'mvp/document_fields.jinja' %}
+        <button class="btn btn-secondary" type="submit">保存草稿修改</button>
+    </form>
+    <hr>
+    <p>确认将使用上次保存的内容：{{ kinds[document.kind] }}，{{ document.product_name }}，{{ document.quantity }} {{ document.product_unit }}。如修改了上方内容，请先保存草稿。</p>
+    <form method="post" action="{{ url_for('confirm_document', document_id=document.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn btn-primary" type="submit">确认过账并生成流水</button>
+    </form>
+    {% endif %}
+    <p class="mt-3"><a href="{{ url_for('documents') }}">返回单据列表</a> · <a href="{{ url_for('ledger') }}">查看库存流水</a></p>
+</section>
+{% endblock %}

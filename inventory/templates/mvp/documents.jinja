@@ -1,0 +1,25 @@
+{% extends 'mvp/base.jinja' %}
+{% block content %}
+<section>
+    <h1>业务单据</h1>
+    <p>每张单据只有一个商品。先保存草稿，再进入单据详情确认；确认后只读。</p>
+    <p class="hint">期初是开始使用系统时已有的数量，每个商品最多确认一次，且必须先于该商品其他已过账业务。不需要期初时可直接从采购入库开始。</p>
+    {% if products %}
+    <form method="post" action="{{ url_for('documents') }}">
+        {% set document = none %}{% include 'mvp/document_fields.jinja' %}
+        <button class="btn btn-primary" type="submit">保存草稿，不改变库存</button>
+    </form>
+    {% else %}<p>暂无启用商品，请先<a href="{{ url_for('products') }}">新增商品档案</a>。</p>{% endif %}
+</section>
+<section class="table-wrap">
+    <h2>单据记录</h2>
+    <table class="table">
+        <thead><tr><th>单号</th><th>类型</th><th>业务日期</th><th>商品</th><th>数量</th><th>状态</th></tr></thead>
+        <tbody>{% for d in documents %}
+        <tr><td><a href="{{ url_for('document', document_id=d.id) }}">单据 {{ d.id }}</a></td>
+            <td>{{ kinds[d.kind] }}</td><td>{{ d.business_date }}</td><td>{{ d.product_code }} · {{ d.product_name }}</td>
+            <td>{{ d.quantity }} {{ d.product_unit }}</td><td>{{ '已过账' if d.state == 'posted' else '草稿' }}</td></tr>
+        {% else %}<tr><td colspan="6">暂无单据。</td></tr>{% endfor %}</tbody>
+    </table>
+</section>
+{% endblock %}

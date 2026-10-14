@@ -1,0 +1,11 @@
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>单据类型<select name="kind" required>
+    {% for key, label in kinds.items() %}<option value="{{ key }}" {{ 'selected' if document and document.kind == key }}>{{ label }}</option>{% endfor %}
+</select></label>
+<label>商品<select name="product_id" required>
+    <option value="">请选择商品</option>
+    {% for p in products %}<option value="{{ p.id }}" {{ 'selected' if document and document.product_id == p.id }}>{{ p.code }} · {{ p.name }}（{{ p.unit }}）</option>{% endfor %}
+</select></label>
+<label>数量（正整数）<input name="quantity" type="number" min="1" max="2147483647" step="1" value="{{ document.quantity if document else 1 }}" required></label>
+<label>业务日期<input name="business_date" type="date" value="{{ document.business_date if document else today }}" required></label>
+<label>备注（选填）<textarea name="note" maxlength="500" rows="2">{{ document.note if document else '' }}</textarea></label>

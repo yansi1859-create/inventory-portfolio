@@ -1,0 +1,27 @@
+{% extends 'mvp/base.jinja' %}
+{% block content %}
+<section>
+    <h1>商品档案</h1>
+    <p>这里只记录商品信息。新增商品库存为 0，实际数量通过业务单据登记。</p>
+    <form method="post" action="{{ url_for('products') }}">
+        {% set product = none %}{% include 'mvp/product_fields.jinja' %}
+        <button class="btn btn-primary" type="submit">新增商品</button>
+    </form>
+</section>
+<section class="table-wrap">
+    <h2>已有商品</h2>
+    <table class="table">
+        <thead><tr><th>编码</th><th>名称</th><th>单位</th><th>安全库存</th><th>状态</th><th>操作</th></tr></thead>
+        <tbody>{% for p in products %}
+        <tr><td>{{ p.code }}</td><td>{{ p.name }}</td><td>{{ p.unit }}</td><td>{{ p.safety_stock }}</td>
+            <td>{{ '启用' if p.active else '已停用' }}</td><td><div class="actions">
+            {% if p.active %}<a href="{{ url_for('edit_product', product_id=p.id) }}">编辑资料</a>
+            <form method="post" action="{{ url_for('delete_product', product_id=p.id) }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn btn-sm btn-outline-danger" type="submit">删除 / 有单据则停用</button>
+            </form>{% endif %}</div></td></tr>
+        {% else %}<tr><td colspan="6">暂无商品。</td></tr>{% endfor %}</tbody>
+    </table>
+    <p class="hint">有单据的商品只能停用。停用后不能创建或确认新业务，已有库存和历史仍保留；请勿随意停用有剩余库存的商品。</p>
+</section>
+{% endblock %}

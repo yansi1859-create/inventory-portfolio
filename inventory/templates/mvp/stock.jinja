@@ -1,0 +1,26 @@
+{% extends 'mvp/base.jinja' %}
+{% block content %}
+<section>
+    <h1>默认仓 · 库存查询</h1>
+    <p>余额由已过账流水相加得到。草稿不会影响库存，不能直接修改余额。</p>
+    <div class="actions">
+        <a href="{{ url_for('inventory') }}">全部库存</a>
+        <a href="{{ url_for('inventory', low=1) }}">只看低库存</a>
+        <a href="{{ url_for('documents') }}">创建入库 / 出库单</a>
+    </div>
+</section>
+<section class="table-wrap">
+    <h2>{{ '低库存商品' if low_only else '商品库存' }}</h2>
+    <p class="hint">启用商品的余额小于或等于安全库存时提醒；安全库存是你设置的提醒数量。</p>
+    <table class="table">
+        <thead><tr><th>编码</th><th>商品</th><th>单位</th><th>当前库存</th><th>安全库存</th><th>状态</th></tr></thead>
+        <tbody>
+        {% for p in products %}
+        <tr><td>{{ p.code }}</td><td>{{ p.name }}</td><td>{{ p.unit }}</td>
+            <td>{{ p.balance }}</td><td>{{ p.safety_stock }}</td>
+            <td>{% if not p.active %}已停用{% elif p.balance <= p.safety_stock %}<span class="warning">低库存</span>{% else %}正常{% endif %}</td></tr>
+        {% else %}<tr><td colspan="6">{{ '暂无低库存商品。' if low_only else '暂无商品，请先在商品档案中新增。' }}</td></tr>{% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

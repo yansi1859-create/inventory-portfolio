@@ -1,0 +1,11 @@
+{% extends 'mvp/base.jinja' %}
+{% block content %}
+<section>
+    <h1>编辑商品资料</h1>
+    <p>已有单据的商品不能修改编码或单位。名称和安全库存可以修改，库存不会改变。</p>
+    <form method="post">
+        {% include 'mvp/product_fields.jinja' %}
+        <button class="btn btn-primary" type="submit">保存资料</button>
+    </form>
+</section>
+{% endblock %}
